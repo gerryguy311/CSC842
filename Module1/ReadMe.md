@@ -1,7 +1,10 @@
 #Prologue 
 Name: Gerry Auger
+
 Date - 8/28/16
+
 Module - 1. TweePreText.py
+
 #Purpose
 TweePreText is a python script that queries Twitter for a specified account, returning a list ordered by highest frequency of hashtags.
 User timelines belonging to protected users may only be requested when the authenticated user either “owns” the timeline or is an approved follower of the owner.

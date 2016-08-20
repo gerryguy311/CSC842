@@ -56,3 +56,5 @@ Twitter will only go back up to 200 tweets. This includes retweets and replies.
 Add Session Tokens to Oauth.io or some other vendor so I dont have to give away the secret key but can allow my code to be run.
 
 Add ability to ingest a file of Twitter handles, Output a list of Twitter Handle and Top Hashtag. 
+
+Add additional social media services. Or create like scripts and then a master script that imports all of them.

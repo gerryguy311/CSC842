@@ -1,0 +1,34 @@
+#INTENTS SCHEMA
+
+{
+  "intents": [ 
+    {
+      "intent": "WhatNewVulnerabilitiesCategoryIntent",
+      "slots": [
+        {
+          "name": "vulnCategory",
+          "type": "LIST_OF_VULN_CATEGORIES"
+        }
+      ]
+    },
+    {
+      "intent": "WhatsNewVulnerabilitiesIntent"
+    },
+    {
+      "intent": "AMAZON.HelpIntent"
+   }
+  ]
+}
+
+
+#UTTERNACES
+
+WhatsNewVulnerabilitiesIntent what new vulnerabilites are there
+WhatsNewVulnerabilitiesIntent Tell me new vulnerabilites
+WhatsNewVulnerabilitiesIntent what new weaknesses are there
+
+WhatNewVulnerabilitiesCategoryIntent what new weaknesses are there for {vulnCategory}
+WhatNewVulnerabilitiesCategoryIntent what new vulnerabilities are there for {vulnCategory}
+WhatNewVulnerabilitiesCategoryIntent Tell me new weaknesses  for {vulnCategory}
+WhatNewVulnerabilitiesCategoryIntent Tell me new vulnerabilities for {vulnCategory}
+WhatNewVulnerabilitiesCategoryIntent vulnerabilities {vulnCategory}

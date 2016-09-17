@@ -1,8 +1,11 @@
 #Name - Gerry Auger
 #Date - 9/18/16
-#Module - 2. Amazon Echo, Alexa Skills application that reports on current vulnerabilities.
-#Purpose - This isnt really a code pull. The source code here has to be placed in various areas (lambda function, AWS Developer Alexa Skills Kit).
-#Usage - You speak any key phrases to a configured Amazon Echo and get reported back current vulnerabilities. 
+#Module - 2. 
+Amazon Echo, Alexa Skills application that reports on current vulnerabilities.
+#Purpose 
+This isnt really a code pull. The source code here has to be placed in various areas (lambda function, AWS Developer Alexa Skills Kit).
+#Usage
+You speak any key phrases to a configured Amazon Echo and get reported back current vulnerabilities. 
 Usage phrases would be: 
 What new vulnerabilites are there
 Tell me new vulnerabilites

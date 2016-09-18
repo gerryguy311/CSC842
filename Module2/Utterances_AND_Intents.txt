@@ -12,6 +12,9 @@
       ]
     },
     {
+      "intent": "EasterEggIntent"
+    },
+    {
       "intent": "WhatsNewVulnerabilitiesIntent"
     },
     {
@@ -32,3 +35,6 @@ WhatNewVulnerabilitiesCategoryIntent what new vulnerabilities are there for {vul
 WhatNewVulnerabilitiesCategoryIntent Tell me new weaknesses  for {vulnCategory}
 WhatNewVulnerabilitiesCategoryIntent Tell me new vulnerabilities for {vulnCategory}
 WhatNewVulnerabilitiesCategoryIntent vulnerabilities {vulnCategory}
+
+
+EasterEggIntent easter egg

@@ -81,11 +81,24 @@ def create_favorite_color_attributes(favorite_color):
     return {"favoriteColor": favorite_color}
 
 
-
 def get_vuln_data_pull():
     """get vulns here"""
     vulnList = ["Microsoft Internet Explorer and Edge CVE-2016-3351 Information Disclosure Vulnerability","Microsoft ASP.NET Core MVC Multiple Privilege Escalation Vulnerabilities", "Microsoft Office CVE-2016-0141 Information Disclosure Vulnerability","Microsoft Office CVE-2016-3366 Spoofing Vulnerability"]
     return vulnList
+
+def get_easter_egg():
+    session_attributes = {}
+    reprompt_text = None
+    card_title = "Easter Egg"
+    
+    speech_output = "This is a hidden feature. This is Gerry's 842 Module 2 assignment."
+    should_end_session = False
+   
+    # Setting reprompt_text to None signifies that we do not want to reprompt
+    # the user. If the user does not respond or says something that is not
+    # understood, the session will end.
+    return build_response(session_attributes, build_speechlet_response(
+        card_title, speech_output, reprompt_text, should_end_session))
 
 def get_new_vulnerabilities():
     session_attributes = {}
@@ -210,6 +223,8 @@ def on_intent(intent_request, session):
         return get_new_vulnerabilities_category(intent)
     elif intent_name == "WhatsNewVulnerabilitiesIntent":
         return get_new_vulnerabilities()
+    elif intent_name == "EasterEggIntent":
+        return get_easter_egg()
     elif intent_name == "AMAZON.HelpIntent":
         return get_welcome_response()
     elif intent_name == "AMAZON.CancelIntent" or intent_name == "AMAZON.StopIntent":

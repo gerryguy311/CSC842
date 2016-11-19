@@ -29,11 +29,27 @@ import dbm
 import smtplib
 import string
 
+#modules to support virusTotal API interface
+import requests
+
+#Check a URL against VirusTotal; returns a JSON formatted msg.
+def CheckURLatVT(url):
+	headers = {
+  "Accept-Encoding": "gzip, deflate",
+  "User-Agent" : "gzip,  My Python requests library example client or username"
+  }
+	params = {'apikey': '24584fab6bffcac1ff37c7f8d8c29746a93bf79a50be1f8ea01a10130cffeacc', 'resource':url , 'scan': '1'}
+	response = requests.post('https://www.virustotal.com/vtapi/v2/url/report',
+  	params=params, headers=headers)
+	json_response = response.json()
+	#print "JSON RESPONSE: " + str(json_response)
+	return json_response
 
 #verify inputs are program and domain 
 if len(sys.argv) != 2:
 	print "[*] Error in execution. \n[*]Proper Usage: python SuspectDomainDetector.py dns_log_file"
 	sys.exit(0)
+
 
 #threshold value in days of how far back you want to look. if value is 5, domains less than 5 days old will be flagged as suspect.
 domain_age_threshold = 5
@@ -52,7 +68,6 @@ body = ""
 #Access DNS log file; Parse for domain and feed this list to whois.
 file = sys.argv[1]
 f = open(file, 'r')
-
 
 #iterate through DNS logs, extract domains and suffixes; 
 for line in f:
@@ -106,9 +121,22 @@ for element in unique_domain_list:
 			message = "\n[*] POTENTIAL ISSUE: Domain " + domain + " registered "+ str(details['creation_date'][0]) +"; within the last " + str(domain_age_threshold) + " days!\n[*] This is suspect behavior. Verify and ensure this domain is what you are expecting.\n"
 			body = body + "\n" + message
 			print message
-			notify_msg = "\" " + domain + " registered " + str(details['creation_date'][0]) + "\" "
 			
+			#query VirusTotal for more info
+			#VirusTotal restricts to 4 queries per minute (w/public api key). 
+			try:
+				json_vt_response = CheckURLatVT(element)
+				vt_positive = json_vt_response['positives']
+				vt_total = json_vt_response['total']
+				vt_link = json_vt_response['permalink']
+				vt_info = str(vt_positive) + "/" + str(vt_total) + ": There are " + str(vt_positive) + " positives over " + str(vt_total) + "  services that check for malicious sites. More info at " + str(vt_link) + "\n"
+				body = body + "\n" + vt_info
+
+			except:
+				err_msg = "Error querying VirusTotal for: " + domain
+				body = body + "\n" + err_msg
 			#if the tool is to be run on local Mac workstation, use terminal-notifier to alert user.
+			#notify_msg = "\" " + domain + " registered " + str(details['creation_date'][0]) + "\" "
 			#cmd = "terminal-notifier -title \"*** SUSPECT DOMAIN DETECTED ***\" -timeout 3 -message " + notify_msg 
 			#print cmd
 			#os.system(cmd)
@@ -136,7 +164,8 @@ for element in unique_domain_list:
 #send email if anything worthwhile was detected.
 if body != "":
 	print "\n\n[*] Preparing Email... \n"
-
+	print "EMAIL BODY: " +body
+	sys.exit()
 	username = ""
 	password = ""
 	HOST = ""

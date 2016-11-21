@@ -34,11 +34,12 @@ import requests
 
 #Check a URL against VirusTotal; returns a JSON formatted msg.
 def CheckURLatVT(url):
+	vt_apiKey = 'ENTER YOUR PUBLIC VT API KEY HERE'
 	headers = {
   "Accept-Encoding": "gzip, deflate",
   "User-Agent" : "gzip,  My Python requests library example client or username"
   }
-	params = {'apikey': '24584fab6bffcac1ff37c7f8d8c29746a93bf79a50be1f8ea01a10130cffeacc', 'resource':url , 'scan': '1'}
+	params = {'apikey': vt_apiKey, 'resource':url , 'scan': '1'}
 	response = requests.post('https://www.virustotal.com/vtapi/v2/url/report',
   	params=params, headers=headers)
 	json_response = response.json()

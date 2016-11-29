@@ -182,10 +182,10 @@ if body != "":
 	        ), "\r\n")
 
 	try:
-		server = smtplib.SMTP_SSL(HOST, port=465)
+		server = smtplib.SMTP(HOST, port=25)
 		server.set_debuglevel(True) # show communication with the server
-		server.login(username, password)
-		server.sendmail(FROM, TO, BODY)
+		#server.login(username, password)
+		#server.sendmail(FROM, TO, BODY)
 		server.quit()
 		print "Email sent: " + BODY
 	except:
